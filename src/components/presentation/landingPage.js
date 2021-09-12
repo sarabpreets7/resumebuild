@@ -20,8 +20,12 @@ const Lp = (props) => {
              {!isLoaded(props.auth.uid)?
               <NavLink to="/getting-started"   className="btn hvr-float-shadow"><span>Login to create Resume!</span>
               </NavLink>:
-              <NavLink to="/getting-started"   className="btn hvr-float-shadow"><span>Create Resume!</span>
+              <div >
+              <NavLink style={{marginRight:"3rem"}} to="/getting-started"   className="btn hvr-float-shadow"><span>Create Resume!</span>
               </NavLink> 
+              <NavLink to="/myresumes"   className="btn hvr-float-shadow"><span>My Resumes!</span>
+              </NavLink> 
+              </div>
             }
                 
                 

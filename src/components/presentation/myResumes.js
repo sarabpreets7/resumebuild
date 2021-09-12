@@ -24,17 +24,16 @@ import * as contactActions from '../../redux/actions/contactActions';
     //await console.log(user.data())
    let ids = user.data().resumeIds
     console.log(ids);
-    
+    let arr=[]
     for(let key in ids){
         let obj =await ids[key]
         console.log(obj)
         
-        resumes.push(<div style={{margin:"13rem"}} className="preview-card">
-                    <ResumePreview contactSection={obj.contactSection} educationSection={obj.educationSection} skinCd={obj.document.skinCd} ></ResumePreview>
-        </div>)
+        arr.push(obj)
+        
     }
     
-    
+    setResumes([...arr])
     console.log(resumes)
     
     
@@ -46,12 +45,7 @@ import * as contactActions from '../../redux/actions/contactActions';
     
 
 
-    // const getFieldData=(key)=>{
-    //     if(contact && contact[key]){
-    //       return contact[key]
-    //     }
-    //     return "";
-    // }
+    
     
     return (
           <div style={{display:"flex",flexWrap:"wrap",justifyContent:"center"}} >
@@ -64,7 +58,11 @@ import * as contactActions from '../../redux/actions/contactActions';
                 <h1>Your Resumes</h1>
                 </div>
             }
-                {resumes}
+                {resumes.map((obj)=>(
+                    <div style={{margin:"13rem"}} className="preview-card">
+                         <ResumePreview contactSection={obj.contactSection} educationSection={obj.educationSection} skinCd={obj.document.skinCd} ></ResumePreview>
+                    </div>
+                ))}
             </div>
     );
 }

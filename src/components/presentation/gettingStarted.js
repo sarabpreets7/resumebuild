@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect ,useState} from 'react';
 import {skinCodes} from '../../constants/typeCodes';
 import * as actionTypes from "../../redux/actions/actionTypes"
 import { bindActionCreators } from 'redux';
@@ -6,7 +6,16 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import * as documentActions from "../../redux/actions/documentActions"
+import image1 from "./images/skin1.svg"
+import image2 from "./images/skin2.svg"
+import image3 from "./images/skin3.svg"
+import image4 from "./images/skin4.svg"
+import image5 from "./images/skin5.svg"
+
+
+
 function GettingStarted(props) {
+    const [array,setArray] = useState([])
      let history = useHistory();
      const onChange = async (skinCd) => {
 
@@ -18,6 +27,10 @@ function GettingStarted(props) {
         }
         history.push('/contact');
       }
+      useEffect(()=>{
+          let arr = [image1,image2,image3,image4];
+          setArray([...arr])
+      })
 
       
         return (  
@@ -33,7 +46,7 @@ function GettingStarted(props) {
                         skinCodes.map((value,index) => {
                             return( <div key={index} className="template-card rounded-border">
                                   <i className={(value == 'demo-value'? 'selected fa fa-check' :'hide') } ></i>
-                                <img  className='' src={'/images/' + value + '.svg'}/>
+                                <img  className='' src={array[index]}/>
                                 <button type="button" onClick={()=>onChange(value)}  className='btn-select-theme'>USE TEMPLATE</button>
                             </div>);
     

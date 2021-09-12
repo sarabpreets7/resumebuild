@@ -11,41 +11,38 @@ import { firestoreConnect } from "react-redux-firebase";
     const firestore = useFirestore();
     let educationSection= props.educationSection
     let contactSection=props.contactSection
-    let document=props.document
+    let documentd=props.document
   
-    const saveToDatabase= async()=>{
+    const saveToDatabase= async()=>{ 
       let user = await firestore.collection('users').doc(props.auth.uid).get();
       user = user.data()
       let newObj = null
       if(user.resumeIds!=undefined){
-        newObj = {...user.resumeIds,[document.id]:{educationSection:educationSection,contactSection:contactSection,document:document}}
+        newObj = {...user.resumeIds,[documentd.id]:{educationSection:educationSection,contactSection:contactSection,document:documentd}}
       }else{
-        newObj = {[document.id]:{educationSection:educationSection,contactSection:contactSection,document:document}}
+        newObj = {[document.id]:{educationSection:educationSection,contactSection:contactSection,document:documentd}}
       }
       await firestore.collection('users').doc(props.auth.uid).update({
         resumeIds:newObj
-
       })
-      alert("Resume saved!")
     }
     
-     const downloadResume=()=> {
-    
-       const input = document.getElementById('resumePreview');
-      console.log(document)
-       html2canvas(input)
-         .then((canvas) => {
-           const imgData = canvas.toDataURL('image/png');
-           const pdf = new jsPDF("p", "mm", "a4");
-           var width = pdf.internal.pageSize.getWidth();
-           var height = pdf.internal.pageSize.getHeight();
-           pdf.addImage(imgData, 'JPEG', 0, 0,width,height);
-           // pdf.output('dataurlnewwindow');
-           pdf.save("resume.pdf");
-         }).catch(function(error){
-           console.log(error)
-         })
-     }
+    const downloadResume=()=> {
+      const input = document.getElementById('resumePreview');
+     console.log(document)
+      html2canvas(input)
+        .then((canvas) => {
+          const imgData = canvas.toDataURL('image/png');
+          const pdf = new jsPDF("p", "mm", "a4");
+          var width = pdf.internal.pageSize.getWidth();
+          var height = pdf.internal.pageSize.getHeight();
+          pdf.addImage(imgData, 'JPEG', 0, 0,width,height);
+          // pdf.output('dataurlnewwindow');
+          pdf.save("resume.pdf");
+        }).catch(function(error){
+          console.log(error)
+        })
+    }
     return (
       <div className="container full finalize-page" >
       <div className="funnel-section ">
