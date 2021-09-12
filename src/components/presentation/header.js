@@ -34,9 +34,9 @@ const Header = (props) => {
   <header className="header" style=
   {{backgroundColor:"#292727" ,color:"white"}}>
   <nav className="nav">
-      <a href="/" className="holder-logo">
+      <NavLink to="/" className="holder-logo">
         <img className='logo' style={{width:"16rem"}} src={logo}></img>
-      </a> 
+      </NavLink> 
         <div className="header-links full-height">
 
         { isLoaded(auth) && !isEmpty(auth) ?<>
